@@ -3,11 +3,13 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int n, m, k;
-// 从[0 ... i]组里选k个获得的最大收益
+int n, m;
+// f[i][j]: 从前i组中选物品，背包容量为j时的最大收益
 int f[110][1010];
 
 int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
     cin >> m >> n;
     unordered_map<int, vector<pair<int, int>>> g;
     int mx = -1;
@@ -19,14 +21,14 @@ int main() {
         mx = max(mx, c);
     }
 
-    for (int i = 0; i < mx + 1; ++i) {
+    for (int i = 0; i <= mx; ++i) {
         // 不选这组，记得放前面，如果i不存在这行不执行状态丢失了
-        for (int j = 0; j < m + 1; ++j) {
+        for (int j = 0; j <= m; ++j) {
             f[i + 1][j] = f[i][j];
         }
         if (!g.contains(i)) {continue;}
         // 选这组，枚举组内物品
-        for (int j = 0; j < m + 1; ++j) {
+        for (int j = 0; j <= m; ++j) {
             for (auto& [c, v] : g[i]) {
                 if (c > j) {
                     continue;
@@ -37,5 +39,5 @@ int main() {
         }
     }
 
-    cout << f[mx + 1][m] << endl;
+    cout << f[mx + 1][m] << '\n';
 }

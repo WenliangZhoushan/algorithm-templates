@@ -15,7 +15,7 @@ int f1(int i, int j) {
 }
 
 int f2(int i, int j) {
-    // buy main and fist sub
+    // buy main and first sub
     return max({
         f1(i, j),
         f[i - 1][j - cv[i].first - cv[subs[i][0]].first] + cv[i].second + cv[subs[i][0]].second,
@@ -39,13 +39,15 @@ int f4(int i, int j) {
 }
 
 int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
     memset(subs, -1, sizeof(subs));
     cin >> n >> m;
     int v, p, q;
 
-    for (int i = 1; i < m + 1; ++i) {
+    for (int i = 1; i <= m; ++i) {
         cin >> v >> p >> q;
-        cv[i] = make_pair(v, v * p);
+        cv[i] = {v, v * p};
         if (q != 0) {
             int j = subs[q][0] == -1 ? 0 : 1;
             subs[q][j] = i;
@@ -56,16 +58,16 @@ int main() {
 
     int ans = 0;
 
-    for (int i = 1; i < m + 1; ++i) {
+    for (int i = 1; i <= m; ++i) {
         if (!king[i]) {
-            for (int j = 0; j < n + 1; ++j) f[i][j] = f[i - 1][j]; 
+            for (int j = 0; j <= n; ++j) f[i][j] = f[i - 1][j];
             continue;
         }
-        for (int j = 0; j < n + 1; ++j) {
+        for (int j = 0; j <= n; ++j) {
             if (cv[i].first > j) {
                 f[i][j] = f[i - 1][j];
                 continue;
-            };
+            }
             if (subs[i][0] == -1 && subs[i][1] == -1) {
                 f[i][j] = f1(i, j);
             } else if (subs[i][0] != -1 && subs[i][1] == -1) {
@@ -87,5 +89,5 @@ int main() {
         ans = max(ans, ranges::max(f[i]));
     }
 
-    cout << ans << endl;
+    cout << ans << '\n';
 }

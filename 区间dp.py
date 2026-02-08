@@ -5,7 +5,7 @@ https://leetcode.com/problems/minimum-insertion-steps-to-make-a-string-palindrom
 
 from functools import cache
 from typing import List
-from math import *
+from math import inf
 
 class Solution:
     def minInsertions(self, s: str) -> int:

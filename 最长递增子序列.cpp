@@ -1,5 +1,5 @@
 // https://www.luogu.com.cn/problem/P8776
-// 一个数组中非递减子序列的数量等于数组中最长递增子序列
+// Dilworth定理：将数组划分为最少的严格下降子序列数 = 最长不下降子序列的长度
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -9,13 +9,15 @@ int f[100010];
 int N, K;
 
 int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
     cin >> N >> K;
-    for (int i = 1; i < N + 1; ++i) {
+    for (int i = 1; i <= N; ++i) {
         cin >> nums[i];
     }
 
     if (K >= N) {
-        cout << K << endl;
+        cout << K << '\n';
         return 0;
     }
 
@@ -30,7 +32,7 @@ int main() {
                 r = m - 1;
             }
         }
-        if (l == cnt.size()) {
+        if (l == (int)cnt.size()) {
             cnt.push_back(nums[i]);
         } else {
             cnt[l] = nums[i];
@@ -41,7 +43,7 @@ int main() {
     int ans = K + f[K + 1];
     cnt.clear();
 
-    for (int i = 1; i < N - K + 1; ++i) {
+    for (int i = 1; i <= N - K; ++i) {
         int l = 0, r = cnt.size() - 1;
         while (l <= r) {
             int m = l + (r - l) / 2;
@@ -51,12 +53,12 @@ int main() {
                 r = m - 1;
             }
         }
-        if (l == cnt.size()) {
+        if (l == (int)cnt.size()) {
             cnt.push_back(nums[i]);
         } else {
             cnt[l] = nums[i];
         }
-        
+
         int j = i + K + 1;
         if (j == N + 1) {
             ans = max(ans, K + (int)cnt.size());
@@ -74,5 +76,5 @@ int main() {
         ans = max(ans, l + K + f[j]);
     }
 
-    cout << ans << endl;
+    cout << ans << '\n';
 }

@@ -15,6 +15,8 @@ int f1(int i, int j) {
 }
 
 int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
     cin >> n >> W;
     int v, w, m;
     for (int i = 0; i < n; ++i) {
@@ -44,7 +46,7 @@ int main() {
         }
     }
 
-    cout << f[n % 2][W] << endl;
+    cout << f[n % 2][W] << '\n';
 }
 
 // 二进制优化枚举 + 暴力组内枚举
@@ -56,7 +58,7 @@ int main() {
 // int costs[110], values[110], nums[110];
 // int f[110][40010];
 // */
-// int costs[2200], values[2200], nums[2200]; // log_2^m
+// int costs[2200], values[2200], nums[2200]; // log_2(m)
 // int f[40010];
 
 // int main () {
