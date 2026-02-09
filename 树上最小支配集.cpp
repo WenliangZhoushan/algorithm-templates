@@ -5,7 +5,7 @@ using namespace std;
 
 const int INF = 0x3f3f3f3f;
 
-int n, m;
+int n;
 int costs[1510];
 struct edge{
     int to, nxt;
@@ -42,8 +42,10 @@ tuple<int, int, int> dfs(int u) {
 }
 
 int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
     cin >> n;
-    for (int i = 0; i < n; ++i) {
+    for (int i = 0; i < n; ++i) {  // 输入格式：节点编号 费用 子节点数
         int j, k, m;
         cin >> j >> k >> m;
         costs[j] = k;
@@ -57,10 +59,10 @@ int main() {
         }
     }
 
-    for (int i = 1; i < n + 1; ++i) {
+    for (int i = 1; i <= n; ++i) {
         if (ins[i] == 0) {
             auto [a, b, c] = dfs(i);
-            cout << min(a, c) << endl;
+            cout << min(a, c) << '\n';
             return 0;
         }
     }

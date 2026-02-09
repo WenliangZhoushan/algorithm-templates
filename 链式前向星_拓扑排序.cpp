@@ -17,8 +17,10 @@ int f[500010];
 int cnt = 1;
 
 int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
     cin >> n >> m;
-    for (int i = 1 ; i < m + 1; ++i) {
+    for (int i = 1; i <= m; ++i) {
         int u, v;
         cin >> u >> v;
         edge e;
@@ -32,7 +34,7 @@ int main() {
 
     queue<int> q;
     int ans = 0;
-    for (int i = 1; i < n + 1; ++i) {
+    for (int i = 1; i <= n; ++i) {
         if (outs[i] == 0) {
             f[i] = 1;
             q.push(i);
@@ -52,11 +54,11 @@ int main() {
         }
     }
 
-    for (int u = 1; u < n + 1; ++u) {
+    for (int u = 1; u <= n; ++u) {
         if (ins[u] == 0) {
             ans = (ans + f[u]) % mod;
         }
     }
 
-    cout << ans << endl;
+    cout << ans << '\n';
 }
