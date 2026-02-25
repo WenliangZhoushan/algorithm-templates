@@ -1,12 +1,12 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// ===== 竞赛Debug工具模板 =====
-// 使用方法：把这段代码放在 #include <bits/stdc++.h>; using namespace std; 后面
-// 用法: debug(n); debug(sum); debug(nums); 只能用于vector或者变量
-// 用法：debug_arr(nums, N); 只能用于静态数组，指定数组nums和长度 
-// 用法: debug2(l, r); debug3(i, j, k);
-// 用法: debugline();
+using ll = long long;
+using pii = pair<int, int>;
+using pll = pair<long long, long long>;
+#define endl "\n"
+#define fi first
+#define se second
 
 template<typename T>
 ostream& operator<<(ostream& os, const vector<T>& v) {
