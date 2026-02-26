@@ -16,29 +16,10 @@ template<typename T_container, typename T = typename enable_if<!is_same<T_contai
 #define debug_arr(a, n) do { cerr << #a << " = ["; for (int i = 0; i < (n); ++i) { if (i) cerr << ", "; cerr << (a)[i]; } cerr << "]" << endl; } while(0)
 #define debugline() cerr << "--------------------" << endl
 
+const int INF = 0x3f3f3f3f;
+const int NEG_INF = 0xcfcfcfcf;
+
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 }
-
-// ===== 使用示例 =====
-/*
-int main() {
-    int n = 5;
-    vector<int> nums = {1, 2, 3, 4, 5};
-    vector<int> s = {10, 20, 30};
-    
-    debug(n);              // 输出: n = 5
-    debug(nums);           // 输出: nums = [1, 2, 3, 4, 5]
-    debug(s);              // 输出: s = [10, 20, 30]
-    debug2(n, nums);       // 输出: n = 5, nums = [1, 2, 3, 4, 5]
-    debugline();           // 输出: --------------------
-    
-    return 0;
-}
-*/
-
-// 注意事项：
-// - 使用 cerr 而不是 cout，避免与正常输出混淆
-// - 提交代码前记得删除或注释掉 debug 语句
-// - 可以用 #ifdef LOCAL 包裹，本地测试时定义 LOCAL 宏即可
