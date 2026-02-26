@@ -94,3 +94,18 @@ int main() {
         solve();
     }
 }
+
+// 埃氏筛
+class Solution {
+public:
+    void countPrimes(int n) {
+        vector<bool> nums(n + 1, 1);
+        for (int i = 2; i * i <= n; ++i) {
+            if (nums[i]) {
+                for (int j = i; i * j <= n; ++j) {
+                    nums[i * j] = false;
+                }
+            }
+        }
+    }
+};
