@@ -20,50 +20,53 @@ const int INF = 0x3f3f3f3f;
 const int NEG_INF = 0xcfcfcfcf;
 
 const int MOD = 1'000'000'007;
-const int MAXN = 105;
-int n;
-ll k;
 
-struct Matrix {
-    ll a[MAXN][MAXN];
-    Matrix() { memset(a, 0, sizeof(a)); }
-} nums;
+using Mat = vector<vector<ll>>;
 
+// 通用矩阵乘法：A(r×m) @ B(m×c) -> C(r×c)
 // 这里 i -> k -> j 的遍历顺序涉及cpu和内存优化
-Matrix multiply(const Matrix& A, const Matrix& B) {
-    Matrix C;
-    for (int i = 1; i <= n; ++i) {
-        for (int k = 1; k <= n; ++k) {
-            if (A.a[i][k] == 0) continue;
-            for (int j = 1; j <= n; ++j) {
-                C.a[i][j] = (C.a[i][j] + A.a[i][k] * B.a[k][j]) % MOD;
+Mat multiply(const Mat& A, const Mat& B) {
+    int r = A.size(), m = B.size(), c = B[0].size();
+    Mat C(r, vector<ll>(c, 0));
+    for (int i = 0; i < r; ++i) {
+        for (int k = 0; k < m; ++k) {
+            if (A[i][k] == 0) continue;
+            for (int j = 0; j < c; ++j) {
+                C[i][j] = (C[i][j] + A[i][k] * B[k][j]) % MOD;
             }
         }
     }
     return C;
 }
 
+// 计算 A^n @ f0，A 为 n×n 方阵，f0 形状任意（如列向量 n×1）
+Mat pow_mul(Mat A, ll n, Mat f0) {
+    while (n > 0) {
+        if (n & 1) f0 = multiply(A, f0);
+        A = multiply(A, A);
+        n >>= 1;
+    }
+    return f0;
+}
+
 void solve() {
+    int n; ll k;
     cin >> n >> k;
-    Matrix ans;
-    for (int i = 1; i <= n; ++i) {
-        ans.a[i][i] = 1;
-        for (int j = 1; j <= n; ++j) {
-            cin >> nums.a[i][j];
-        }
-    }
 
-    while (k > 0) {
-        if (k & 1) ans = multiply(ans, nums);
-        nums = multiply(nums, nums);
-        k >>= 1;
-    }
+    Mat A(n, vector<ll>(n));
+    for (int i = 0; i < n; ++i)
+        for (int j = 0; j < n; ++j)
+            cin >> A[i][j];
 
-    for (int i = 1; i <= n; ++i) {
-        for (int j = 1; j <= n; ++j) {
-            cout << ans.a[i][j] << " ";
-        }
-        cout << endl;
+    // 单位矩阵作为 f0 示例，等价于直接计算 A^k
+    Mat f0(n, vector<ll>(n, 0));
+    for (int i = 0; i < n; ++i) f0[i][i] = 1;
+
+    Mat ans = pow_mul(A, k, f0);
+
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n; ++j)
+            cout << ans[i][j] << " \n"[j == n - 1];
     }
 }
 
