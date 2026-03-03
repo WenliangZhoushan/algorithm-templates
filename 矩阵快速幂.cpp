@@ -19,6 +19,7 @@ template<typename T_container, typename T = typename enable_if<!is_same<T_contai
 const int INF = 0x3f3f3f3f;
 const int NEG_INF = 0xcfcfcfcf;
 
+/* ------------ 删掉mod如果题目没要求，同36行 ------------ */
 const int MOD = 1'000'000'007;
 
 using Mat = vector<vector<ll>>;
