@@ -19,7 +19,10 @@ template<typename T_container, typename T = typename enable_if<!is_same<T_contai
 const int INF = 0x3f3f3f3f;
 const int NEG_INF = 0xcfcfcfcf;
 
-ll a, b, p;
+const int mod = 1'000'000'007;
+int a, b;
+
+/* 求 (a / b) % mod，等于 (a % mod * (qpow(b, mod - 2, mod) % mod)) % mod */
 
 /* --------------- (a ^ b) % p --------------- */
 int qpow(ll a, ll b, ll p) {
@@ -34,9 +37,8 @@ int qpow(ll a, ll b, ll p) {
 }
 
 void solve() {
-    // a ^ b % p
-    cin >> a >> b >> p;
-    int ans = qpow(a, b, p);
+    cin >> a >> b;
+    int ans = (a % mod * (qpow(b, mod - 2, mod) % mod)) % mod;
 }
 
 int main() {
