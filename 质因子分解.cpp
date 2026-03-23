@@ -22,52 +22,52 @@ const int NEG_INF = 0xcfcfcfcf;
 // 返回n的质因子分解结果：(质因子, 指数)
 // 例如：n = 360 -> (2,3), (3,2), (5,1)
 vector<pair<ll, int>> factorize(ll n) {
-	vector<pair<ll, int>> factors;
-	if (n <= 1) {
-		return factors;
-	}
+  vector<pair<ll, int>> factors;
+  if (n <= 1) {
+    return factors;
+  }
 
-	for (ll p = 2; p * p <= n; ++p) {
-		if (n % p != 0) {
-			continue;
-		}
-		int cnt = 0;
-		while (n % p == 0) {
-			n /= p;
-			++cnt;
-		}
-		factors.push_back({p, cnt});
-	}
+  for (ll p = 2; p * p <= n; ++p) {
+    if (n % p != 0) {
+      continue;
+    }
+    int cnt = 0;
+    while (n % p == 0) {
+      n /= p;
+      ++cnt;
+    }
+    factors.push_back({p, cnt});
+  }
 
-	if (n > 1) {
-		factors.push_back({n, 1});
-	}
-	return factors;
+  if (n > 1) {
+    factors.push_back({n, 1});
+  }
+  return factors;
 }
 
 int main() {
-	ios::sync_with_stdio(false);
-	cin.tie(nullptr);
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
 
-	ll n;
-	cin >> n;
+  ll n;
+  cin >> n;
 
-	auto factors = factorize(n);
+  auto factors = factorize(n);
 
-	if (factors.empty()) {
-		cout << n << " 没有质因子分解结果\n";
-		return 0;
-	}
+  if (factors.empty()) {
+    cout << n << " 没有质因子分解结果\n";
+    return 0;
+  }
 
-	// 输出格式：p1^a1 * p2^a2 * ...
-	for (int i = 0; i < (int)factors.size(); ++i) {
-		if (i) {
-			cout << " * ";
-		}
-		cout << factors[i].first;
-		if (factors[i].second > 1) {
-			cout << '^' << factors[i].second;
-		}
-	}
-	cout << endl;;
+  // 输出格式：p1^a1 * p2^a2 * ...
+  for (int i = 0; i < (int)factors.size(); ++i) {
+    if (i) {
+      cout << " * ";
+    }
+    cout << factors[i].first;
+    if (factors[i].second > 1) {
+      cout << '^' << factors[i].second;
+    }
+  }
+  cout << endl;;
 }

@@ -23,23 +23,23 @@ ll a, b, p;
 
 /* --------------- (a ^ b) % p --------------- */
 int qpow(ll a, ll b, ll p) {
-    ll ans = 1, cnt = a;
-    for (int i = 0; i <= 30; ++i) {
-        if ((1 << i) & b) {
-            ans = (ans * cnt) % p;
-        }
-        cnt = (cnt * cnt) % p;
+  ll ans = 1, cnt = a;
+  for (int i = 0; i <= 30; ++i) {
+    if ((1 << i) & b) {
+      ans = (ans * cnt) % p;
     }
-    return ans;
+    cnt = (cnt * cnt) % p;
+  }
+  return ans;
 }
 
 void solve() {
-    // a ^ b % p
-    cin >> a >> b >> p;
-    int ans = qpow(a, b, p);
+  // a ^ b % p
+  cin >> a >> b >> p;
+  int ans = qpow(a, b, p);
 }
 
 int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
 }

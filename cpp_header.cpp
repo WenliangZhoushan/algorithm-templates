@@ -20,6 +20,6 @@ const int INF = 0x3f3f3f3f;
 const int NEG_INF = 0xcfcfcfcf;
 
 int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
 }
