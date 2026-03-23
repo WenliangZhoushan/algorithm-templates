@@ -26,86 +26,86 @@ vector<i128> p = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37};
 
 // 读取 __int128 类型的数字
 i128 read() {
-    i128 x = 0, f = 1;
-    char ch = getchar();
-    while (ch < '0' || ch > '9') {
-        if (ch == '-') f = -1;
-        ch = getchar();
-    }
-    while (ch >= '0' && ch <= '9') {
-        x = x * 10 + ch - '0';
-        ch = getchar();
-    }
-    return x * f;
+  i128 x = 0, f = 1;
+  char ch = getchar();
+  while (ch < '0' || ch > '9') {
+    if (ch == '-') f = -1;
+    ch = getchar();
+  }
+  while (ch >= '0' && ch <= '9') {
+    x = x * 10 + ch - '0';
+    ch = getchar();
+  }
+  return x * f;
 }
 
 // 输出 __int128 类型的数字
 void print(i128 x) {
-    if (x < 0) putchar('-'), x = -x;
-    if (x > 9) print(x / 10);
-    putchar(x % 10 + '0');
+  if (x < 0) putchar('-'), x = -x;
+  if (x > 9) print(x / 10);
+  putchar(x % 10 + '0');
 }
 
 i128 qpow(i128 a, i128 b, i128 mod) {
-    i128 ret = 1;
-    while(b) {
-        if(b & 1) ret = (ret * a) % mod;
-        a = (a * a) % mod;
-        b >>= 1;
-    }
-    return ret % mod;
+  i128 ret = 1;
+  while(b) {
+    if(b & 1) ret = (ret * a) % mod;
+    a = (a * a) % mod;
+    b >>= 1;
+  }
+  return ret % mod;
 }
 
 bool miller_rabin(i128 n) {
-    if(n < 3 || n % 2 == 0) return n == 2;
-    i128 u = n - 1, t = 0;
-    while(u % 2 == 0) u /= 2, ++ t;
-    for(auto a : p) {
-        if(n == a) return 1;
-        if(n % a == 0) return 0;
-        i128 v = qpow(a, u, n);
-        if(v == 1) continue;
-        i128 s = 1;
-        for(; s <= t; ++ s) {
-            if(v == n - 1) break;
-            v = v * v % n;
-        }
-        if(s > t) return 0; 
+  if(n < 3 || n % 2 == 0) return n == 2;
+  i128 u = n - 1, t = 0;
+  while(u % 2 == 0) u /= 2, ++ t;
+  for(auto a : p) {
+    if(n == a) return 1;
+    if(n % a == 0) return 0;
+    i128 v = qpow(a, u, n);
+    if(v == 1) continue;
+    i128 s = 1;
+    for(; s <= t; ++ s) {
+      if(v == n - 1) break;
+      v = v * v % n;
     }
-    return 1;
+    if(s > t) return 0; 
+  }
+  return 1;
 }
 
 void solve() {
-    n = read();
-    if (miller_rabin(n)) {
-        cout << "Yes" << endl;
-        return;
-    }
-    cout << "No" << endl;
+  n = read();
+  if (miller_rabin(n)) {
+    cout << "Yes" << endl;
+    return;
+  }
+  cout << "No" << endl;
 }
 
 int main() {
-    // 禁用以下代码，否则MLE
-    // ios::sync_with_stdio(false);
-    // cin.tie(nullptr);
+  // 禁用以下代码，否则MLE
+  // ios::sync_with_stdio(false);
+  // cin.tie(nullptr);
 
-    cin >> t;
-    while (t--) {
-        solve();
-    }
+  cin >> t;
+  while (t--) {
+    solve();
+  }
 }
 
 // 埃氏筛
 class Solution {
 public:
-    void countPrimes(int n) {
-        vector<bool> nums(n + 1, 1);
-        for (int i = 2; i * i <= n; ++i) {
-            if (nums[i]) {
-                for (int j = i; i * j <= n; ++j) {
-                    nums[i * j] = false;
-                }
-            }
+  void countPrimes(int n) {
+    vector<bool> nums(n + 1, 1);
+    for (int i = 2; i * i <= n; ++i) {
+      if (nums[i]) {
+        for (int j = i; i * j <= n; ++j) {
+          nums[i * j] = false;
         }
+      }
     }
+  }
 };

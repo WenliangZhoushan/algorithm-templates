@@ -26,22 +26,22 @@ int a, b;
 
 /* --------------- (a ^ b) % p --------------- */
 int qpow(ll a, ll b, ll p) {
-    ll ans = 1, cnt = a;
-    for (int i = 0; i <= 30; ++i) {
-        if ((1 << i) & b) {
-            ans = (ans * cnt) % p;
-        }
-        cnt = (cnt * cnt) % p;
+  ll ans = 1, cnt = a;
+  for (int i = 0; i <= 30; ++i) {
+    if ((1 << i) & b) {
+      ans = (ans * cnt) % p;
     }
-    return ans;
+    cnt = (cnt * cnt) % p;
+  }
+  return ans;
 }
 
 void solve() {
-    cin >> a >> b;
-    int ans = (a % mod * (qpow(b, mod - 2, mod) % mod)) % mod;
+  cin >> a >> b;
+  int ans = (a % mod * (qpow(b, mod - 2, mod) % mod)) % mod;
 }
 
 int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
 }

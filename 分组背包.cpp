@@ -8,36 +8,36 @@ int n, m;
 int f[110][1010];
 
 int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    cin >> m >> n;
-    unordered_map<int, vector<pair<int, int>>> g;
-    int mx = -1;
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
+  cin >> m >> n;
+  unordered_map<int, vector<pair<int, int>>> g;
+  int mx = -1;
 
-    for (int i = 0; i < n; ++i) {
-        int a, b, c;
-        cin >> a >> b >> c;
-        g[c].emplace_back(a, b);
-        mx = max(mx, c);
+  for (int i = 0; i < n; ++i) {
+    int a, b, c;
+    cin >> a >> b >> c;
+    g[c].emplace_back(a, b);
+    mx = max(mx, c);
+  }
+
+  for (int i = 0; i <= mx; ++i) {
+    // 不选这组，记得放前面，如果i不存在这行不执行状态丢失了
+    for (int j = 0; j <= m; ++j) {
+      f[i + 1][j] = f[i][j];
     }
-
-    for (int i = 0; i <= mx; ++i) {
-        // 不选这组，记得放前面，如果i不存在这行不执行状态丢失了
-        for (int j = 0; j <= m; ++j) {
-            f[i + 1][j] = f[i][j];
+    if (!g.contains(i)) {continue;}
+    // 选这组，枚举组内物品
+    for (int j = 0; j <= m; ++j) {
+      for (auto& [c, v] : g[i]) {
+        if (c > j) {
+          continue;
         }
-        if (!g.contains(i)) {continue;}
-        // 选这组，枚举组内物品
-        for (int j = 0; j <= m; ++j) {
-            for (auto& [c, v] : g[i]) {
-                if (c > j) {
-                    continue;
-                }
-                // {之前可能的答案，不选，选}
-                f[i + 1][j] = max({f[i + 1][j], f[i][j], f[i][j - c] + v});
-            }
-        }
+        // {之前可能的答案，不选，选}
+        f[i + 1][j] = max({f[i + 1][j], f[i][j], f[i][j - c] + v});
+      }
     }
+  }
 
-    cout << f[mx + 1][m] << '\n';
+  cout << f[mx + 1][m] << '\n';
 }
