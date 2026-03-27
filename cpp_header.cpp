@@ -13,8 +13,8 @@ template<typename T_container, typename T = typename enable_if<!is_same<T_contai
 #define debug(x) cerr << #x << " = " << x << endl
 #define debug2(x, y) cerr << #x << " = " << x << ", " << #y << " = " << y << endl
 #define debug3(x, y, z) cerr << #x << " = " << x << ", " << #y << " = " << y << ", " << #z << " = " << z << endl
-#define debug_arr(a, n) do { cerr << #a << " = ["; for (int i = 0; i < (n); ++i) { if (i) cerr << ", "; cerr << (a)[i]; } cerr << "]" << endl; } while(0)
-#define line() cerr << "--------------------" << endl
+#define debug_arr(first, last) do { cerr << "["; bool _f = false; for (auto _it = (first); _it != (last); ++_it) { if (_f) cerr << ", "; cerr << *_it; _f = true; } cerr << "]" << endl; } while(0)
+#define debugline() cerr << "--------------------" << endl
 
 const int INF = 0x3f3f3f3f;
 const int NEG_INF = 0xcfcfcfcf;
